@@ -47,7 +47,7 @@ class HelloWorldLayer < CCLayer
     @backgroundNode.addChild @planetsunrise, z:-1, parallaxRatio: bgSpeed, positionOffset: [600,winSize.height * 0]
     @backgroundNode.addChild @spacialanomaly, z:-1, parallaxRatio: bgSpeed, positionOffset: [900,winSize.height * 0.3]
     @backgroundNode.addChild @spacialanomaly2, z:-1, parallaxRatio: bgSpeed, positionOffset: [1500,winSize.height * 0.9]
-    scheduleUpdate
+    scheduleUpdate # "schedule 'update:'" also crashes mysteriously
     self
   end
   
