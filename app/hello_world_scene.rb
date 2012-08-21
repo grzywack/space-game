@@ -29,6 +29,7 @@ class HelloWorldLayer < CCLayer
     @batchNode.addChild @ship, z: 1
     # 1) Create the CCParallaxNode
     @backgroundNode = CCParallaxNode.node
+    @backgroundNode.parallaxArray
     addChild @backgroundNode, z: -1
     # 2) Create the sprites we'll add to the CCParallaxNode
     @spacedust1 = CCSprite.spriteWithFile "Backgrounds/bg_front_spacedust.png"
@@ -47,11 +48,13 @@ class HelloWorldLayer < CCLayer
     @backgroundNode.addChild @planetsunrise, z:-1, parallaxRatio: bgSpeed, positionOffset: [600,winSize.height * 0]
     @backgroundNode.addChild @spacialanomaly, z:-1, parallaxRatio: bgSpeed, positionOffset: [900,winSize.height * 0.3]
     @backgroundNode.addChild @spacialanomaly2, z:-1, parallaxRatio: bgSpeed, positionOffset: [1500,winSize.height * 0.9]
-    scheduleUpdate # "schedule 'update:'" also crashes mysteriously
+    # scheduleUpdate # "schedule 'update:'" also crashes mysteriously
+    schedule 'update'
     self
   end
   
-  def update dt
+  def update #dt
+    dt = 0.2
     backgroundScrollVel = [-1000, 0]
     mult = CGPoint.new(backgroundScrollVel[0] * dt, backgroundScrollVel[1] * dt)
     @backgroundNode.position = [@backgroundNode.position.x + mult.x, @backgroundNode.position.y + mult.y]
